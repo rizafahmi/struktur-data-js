@@ -21,26 +21,23 @@ function createGraph(directed = false) {
     edges,
 
     addNode: function (key) {
-      nodes.push(createNode(key));
+      const newNode = createNode(key);
+      nodes.push(newNode);
     },
     getNode: function (key) {
-
       return nodes.find(function (node) {
         return node.key === key;
-      });
+      })
     },
     addEdge: function (node1key, node2key) {
       const node1 = this.getNode(node1key);
-
       const node2 = this.getNode(node2key);
 
       node1.addNeighbor(node2);
-      edges.push(`${node1key}-${node2key}`);
 
       if (!directed) {
         node2.addNeighbor(node1);
       }
-
     },
     print: function () {
       return nodes.map(function ({ key, neighbors }) {
@@ -53,25 +50,26 @@ function createGraph(directed = false) {
         }
 
         return result;
-      }).join('\n');
+      }).join(`\n`);
     }
   }
 }
 
 const graph = createGraph(true);
 
-graph.addNode('Rudy');
-graph.addNode('Irwin');
-graph.addNode('Steve');
-graph.addNode('Annie');
+graph.addNode('Ani');
+graph.addNode('Banu');
+graph.addNode('Cindy');
+graph.addNode('Dina');
+graph.addNode('Elisa');
+graph.addNode('Fadli');
 
-graph.addEdge('Rudy', 'Annie');
-graph.addEdge('Rudy', 'Irwin');
-graph.addEdge('Rudy', 'Steve');
-graph.addEdge('Irwin', 'Annie');
-graph.addEdge('Irwin', 'Steve');
-graph.addEdge('Steve', 'Irwin');
-graph.addEdge('Steve', 'Annie');
-graph.addEdge('Annie', 'Steve');
+graph.addEdge('Ani', 'Banu');
+graph.addEdge('Banu', 'Cindy');
+graph.addEdge('Banu', 'Dina');
+graph.addEdge('Ani', 'Dina');
+graph.addEdge('Dina', 'Fadli');
+graph.addEdge('Elisa', 'Fadli');
+graph.addEdge('Fadli', 'Ani');
 
 console.log(graph.print());
